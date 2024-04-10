@@ -1,30 +1,31 @@
-import {BrowserRouter as Router,Router} from 'react-router-dom';
+import {Routes,Route, Switch} from 'react-router-dom';
 import EmployeeList from './Components/EmployeeList';
 import EmployeeForm from './Components/EmployeeForm';
+import { useEffect, useState } from 'react';
+import emps from './data.js';
 
 function App() {
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
-    setEmployees(fetch('https://my.api.mockaroo.com/users.json?key=495ed610').then((res)=> res.json));
+    // fetch('./data.js')
+    //   .then((res)=> res.json())
+    //   .then((data)=>setEmployees(data));
+    setEmployees(emps);
+
   }, [])
 
+  console.log(employees);
+
   return (
-    <Router>
-      <Container>
-        <Switch>
-          <Route path="/" exact>
-            <EmployeeList employees={employees} setEmployees={setEmployees} />
-          </Route>
-          <Route path="/add">
-            <EmployeeForm setEmployees={setEmployees} />
-          </Route>
-          <Route path="/edit/:id">
-            <EmployeeForm setEmployees={setEmployees} employees={employees} />
-          </Route>
-        </Switch>
-      </Container>
-    </Router>
+    <Routes>
+      <Route path="/" element = {<EmployeeList setEmployees={setEmployees} employees={employees}></EmployeeList>} exact>
+      </Route>
+      <Route path="/add" element = {<EmployeeForm setEmployees={setEmployees} employees={employees}/>}>
+      </Route>
+      <Route path="/edit/:id" element = {<EmployeeForm setEmployees={setEmployees} employees={employees} />}>
+      </Route>
+    </Routes>
   );
 }
 
