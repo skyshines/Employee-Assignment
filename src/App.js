@@ -3,17 +3,11 @@ import EmployeeList from './Components/EmployeeList';
 import EmployeeForm from './Components/EmployeeForm';
 import { useEffect, useState } from 'react';
 import emps from './data.js';
+import './App.css'
 
 function App() {
   const [employees, setEmployees] = useState([]);
 
-  useEffect(() => {
-    // fetch('./data.js')
-    //   .then((res)=> res.json())
-    //   .then((data)=>setEmployees(data));
-    setEmployees(emps);
-
-  }, [])
 
   console.log(employees);
 
